@@ -1,3 +1,4 @@
+from typing import Union
 from motor import MotorDatabase
 from pydantic import BaseModel, ValidationError
 import tornado
@@ -12,6 +13,13 @@ class BaseHandler(tornado.web.RequestHandler):
     '''
     def initialize(self, db: MotorDatabase = None):
         self.db = db
+
+    def get_current_user(self) -> Union[str, None]:
+        user = self.get_signed_cookie('auth')
+        if user is not None:
+            user = str(user)
+
+        return user
 
     def validate(self, schema: BaseModel):
         '''
