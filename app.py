@@ -36,7 +36,7 @@ class Application(tornado.web.Application):
 
 async def main():
     app = Application(db)
-    app.listen(8080)
+    app.listen(os.environ['PORT'], '0.0.0.0')
     await asyncio.Event().wait()
 
 if __name__ == '__main__':

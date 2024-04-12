@@ -1,6 +1,8 @@
 FROM python:3.9
 
-EXPOSE 8080
+ARG PORT
+
+EXPOSE $PORT
 
 COPY requirements.txt ./
 
