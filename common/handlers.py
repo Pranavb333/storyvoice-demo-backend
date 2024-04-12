@@ -1,3 +1,4 @@
+import os
 from typing import Union
 from motor import MotorDatabase
 from pydantic import BaseModel, ValidationError
@@ -21,7 +22,17 @@ class BaseHandler(tornado.web.RequestHandler):
 
         return user
 
-    def validate(self, schema: BaseModel):
+    def set_default_headers(self) -> None:
+        self.set_header(
+            'Access-Control-Allow-Origin', os.environ['CORS_ORIGIN']
+        )
+        self.set_header('Access-Control-Allow-Headers', 'x-requested-with')
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+        self.set_header('Access-Control-Allow-Credentials', 'true')
+
+        return
+
+    def validate(self, schema: BaseModel) -> BaseModel:
         '''
         Validates the request body as JSON using a pydantic model
         '''

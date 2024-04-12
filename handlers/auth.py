@@ -31,10 +31,12 @@ class SignInHandler(BaseHandler):
             value=user_id,
             httponly=True,
             secure=True,
+            samesite='none',
         )
         self.write({
             'message': 'success'
         })
+        self.finish()
 
         return
 
