@@ -73,7 +73,7 @@ class StoryHandler(BaseHandler):
         )
 
         self.write({
-            '_id': story_id
+            '_id': str(story_id)
         })
 
         return
