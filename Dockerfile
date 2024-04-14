@@ -10,4 +10,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+ARG MONGODB_URL
+ARG DB_NAME
+
+RUN python3 scripts/init.py
+
 CMD ["python3", "app.py"]
